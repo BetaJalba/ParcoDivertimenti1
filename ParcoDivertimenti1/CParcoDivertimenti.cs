@@ -25,7 +25,7 @@ namespace ParcoDivertimenti1
             foreach (CArea area in aree) 
             {
                 //prende l'indice dell'area e va a capo e intabula
-                areeStr += $"Area {aree.IndexOf(area) + 1}\n{area}";
+                areeStr += $"\nArea {aree.IndexOf(area) + 1}\n{area}\n";
             }
             return $"Parco divertimenti {nome}\n{areeStr}";
         }
@@ -39,6 +39,21 @@ namespace ParcoDivertimenti1
         {
             while (aree.IndexOf(area) != -1) //per non usare .Contains()
                 aree.Remove(area);
+        }
+
+        public string ElencoAttrazioni(int mese)
+        {
+            if (mese > 12 || mese < 0)
+                throw new Exception("Mese non valido!");
+
+            string r = $"Elenco attrazioni aperte nel mese {mese}:\n";
+            //controlla il mese corrente di tutte le aree e seleziona quelle che sono aperte nel mese dato in input
+            foreach (CArea area in aree)
+            {
+                if (mese >= area.DataApertura.Month && area.DataApertura.Day >= area.DataApertura.Day && mese <= area.DataChiusura.Month && mese <= area.DataChiusura.Day)
+                    r += $"{area}\n";       
+            }
+            return r;
         }
     }
 }

@@ -11,31 +11,31 @@ namespace ParcoDivertimenti1
         public List<CAttrazione> AttrazioniInCorso { get; private set; }
         float visitatoriAtOra { get; set; }
         //la media dei visitatori può essere decimale
-        DateTime dataApertura { get; set; }
-        DateTime dataChiusura { get; set; }
+        public DateTime DataApertura { get; private set; }
+        public DateTime DataChiusura { get; private set; }
 
         public CArea()
         {
             AttrazioniInCorso = new List<CAttrazione>();
             visitatoriAtOra = 0;
-            dataApertura = DateTime.Now;
-            dataChiusura = DateTime.MaxValue; //non chiude
+            DataApertura = DateTime.Now;
+            DataChiusura = DateTime.MaxValue; //non chiude
         }
 
-        public CArea(float visitatoriAtOra, DateTime dataApertura, DateTime dataChiusura) 
+        public CArea(float visitatoriAtOra, DateTime DataApertura, DateTime DataChiusura) 
         {
             AttrazioniInCorso = new List<CAttrazione>();
             this.visitatoriAtOra = visitatoriAtOra;
-            this.dataApertura = dataApertura;
-            this.dataChiusura = dataChiusura;
+            this.DataApertura = DataApertura;
+            this.DataChiusura = DataChiusura;
         }
 
         public override string ToString()
         {
-            string attrazioni = String.Join("", AttrazioniInCorso.Select(attrazione => attrazione.ToString()));
+            string attrazioni = String.Join("\n\n", AttrazioniInCorso.Select(attrazione => attrazione.ToString()));
             if (attrazioni.Length < 1)
                 attrazioni = "nessuna";
-            return $"Visitatori all'ora: {visitatoriAtOra}\nData apertura: {dataApertura}\nData chiusura: {dataChiusura}\nAttrazioni:\n{attrazioni}";
+            return $"Visitatori all'ora: {visitatoriAtOra}\nData apertura: {DataApertura}\nData chiusura: {DataChiusura}\n\n\tAttrazioni:\n{attrazioni}";
         }
 
         public void AddAttrazione(CAttrazione attrazione) 
